@@ -24,6 +24,24 @@ travel-memory_build/
 
 工具链默认装在脚本同级 `../.tools/`（已被 `.gitignore` 忽略，不会提交）。
 
+## 产物与工具的放置约定
+
+三个仓库分工：
+
+| 仓库 | 放什么 |
+|------|--------|
+| `travel-memory_harmony` | 鸿蒙壳**源码** |
+| `travel-memory_android` | 安卓壳**源码** |
+| `travel-memory_build`（本仓库） | **编译脚本 + 编译产物 + 工具** |
+
+- **编译产物（HAP / APK）**：**不进任何源码仓库**，统一作为本仓库的 **GitHub Releases** 附件发布。
+  当前发布：**[v1.0.0](https://github.com/shihezichen/travel-memory_build/releases/tag/v1.0.0)**
+  - `travel-memory-harmony-signed.hap`（签名，可装机）
+  - `travel-memory-android-debug.apk`（debug，可直接安装）
+- **编译工具（JDK / Gradle / Android SDK）**：**不进 git**（体积大、与机器相关、可由脚本重建），
+  放在本仓库本地、被 `.gitignore` 忽略的 `.tools/` 目录；鸿蒙侧工具链即 **DevEco Studio 安装本身**。
+  换机器或其他 Agent 克隆本仓库后，跑 `bootstrap-android-toolchain.ps1` 即可重建 `.tools/`。
+
 ---
 
 ## 一、鸿蒙 HAP

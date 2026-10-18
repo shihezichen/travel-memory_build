@@ -38,10 +38,11 @@ param(
 # gradle progress/warnings) does not abort the script. Failures caught via $LASTEXITCODE.
 $ErrorActionPreference = 'Continue'
 
-# --- Locate JDK home (unzipped top folder name is version-specific) ------
-$jdkHome = Get-ChildItem $ToolsDir -Directory -ErrorAction SilentlyContinue |
-  Where-Object { Test-Path (Join-Path $_.FullName "bin\java.exe") } |
-  Select-Object -First 1 -ExpandProperty FullName
+# --- Locate JDK home (layout varies by vendor: jdk17\bin OR jdk17\zulu-...\bin) ---
+$javaExe = Get-ChildItem $ToolsDir -Recurse -Filter "java.exe" -ErrorAction SilentlyContinue |
+  Where-Object { $_.FullName -match '\\bin\\java\.exe$' -and (Test-Path (Join-Path $_.DirectoryName "javac.exe")) } |
+  Select-Object -First 1
+$jdkHome = if ($javaExe) { Split-Path $javaExe.DirectoryName -Parent } else { $null }
 if (-not $jdkHome) { throw "JDK not found under '$ToolsDir'. Run bootstrap-android-toolchain.ps1 first." }
 
 # --- Locate Gradle -------------------------------------------------------
