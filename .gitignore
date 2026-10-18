@@ -1,0 +1,9 @@
+# Local Android toolchain (JDK/Gradle/SDK) - large, machine-specific, never commit
+.tools/
+android/.tools/
+
+# Build outputs / logs
+*.log
+*.apk
+*.hap
+build/
