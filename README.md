@@ -19,6 +19,7 @@ travel-memory_build/
 ├─ android/
 │  ├─ bootstrap-android-toolchain.ps1   # 下载并安装 JDK17 + Gradle + Android SDK
 │  └─ build-apk.ps1                     # 用本地工具链编译 APK
+├─ publish-release.ps1                  # 一键把 HAP/APK 发布为 GitHub Release
 └─ README.md
 ```
 
@@ -94,6 +95,21 @@ travel-memory_build/
 ```
 
 产物：`<ProjectDir>\app\build\outputs\apk\debug\app-debug.apk`
+
+---
+
+## 三、发布新包（一键）
+
+把编译好的 HAP/APK 一键发布为 GitHub Release（作为附件，可直接下载安装）。
+
+```powershell
+.\publish-release.ps1 -HapPath D:\out\entry-default-signed.hap -ApkPath D:\out\app-debug.apk
+```
+
+- **Tag 规范（按日期）**：默认 `vYYYY.MM.dd`（如 `v2026.10.18`）；同一天多次构建会自动加 `-2`、`-3` 后缀，不会冲突。首个里程碑是 `v1.0.0`，日常构建用日期 tag。
+- **认证**：优先读环境变量 `GITHUB_TOKEN` / `GH_TOKEN`，否则用本机 git 里保存的 github.com 凭据（`git credential fill`）——脚本不写死任何密钥。
+- 只发其中一个包也支持（例如仅 `-ApkPath`）。
+- 发布历史见仓库的 Releases 页。
 
 ---
 
