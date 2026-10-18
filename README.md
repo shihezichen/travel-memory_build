@@ -36,7 +36,7 @@ travel-memory_build/
 | `travel-memory_build`（本仓库） | **编译脚本 + 编译产物 + 工具** |
 
 - **编译产物（HAP / APK）**：**不进任何源码仓库**，统一作为本仓库的 **GitHub Releases** 附件发布。
-  当前发布：**[v1.0.0](https://github.com/shihezichen/travel-memory_build/releases/tag/v1.0.0)**
+  发布历史（最新在上）：**[Releases](https://github.com/shihezichen/travel-memory_build/releases)**（当前 `v2026.10.18`）
   - `travel-memory-harmony-signed.hap`（签名，可装机）
   - `travel-memory-android-debug.apk`（debug，可直接安装）
 - **编译工具（JDK / Gradle / Android SDK）**：**不进 git**（体积大、与机器相关、可由脚本重建），
@@ -106,7 +106,7 @@ travel-memory_build/
 .\publish-release.ps1 -HapPath D:\out\entry-default-signed.hap -ApkPath D:\out\app-debug.apk
 ```
 
-- **Tag 规范（按日期）**：默认 `vYYYY.MM.dd`（如 `v2026.10.18`）；同一天多次构建会自动加 `-2`、`-3` 后缀，不会冲突。首个里程碑是 `v1.0.0`，日常构建用日期 tag。
+- **Tag 规范（按日期）**：默认 `vYYYY.MM.dd`（如 `v2026.10.18`）；同一天多次构建会自动加 `-2`、`-3` 后缀，不会冲突。日常构建统一用日期 tag。
 - **认证**：优先读环境变量 `GITHUB_TOKEN` / `GH_TOKEN`，否则用本机 git 里保存的 github.com 凭据（`git credential fill`）——脚本不写死任何密钥。
 - 只发其中一个包也支持（例如仅 `-ApkPath`）。
 - 发布历史见仓库的 Releases 页。

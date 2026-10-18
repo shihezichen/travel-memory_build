@@ -11,7 +11,7 @@
 
   Tag convention (date-based): vYYYY.MM.dd  (e.g. v2026.10.18)
     - If the tag already exists (multiple builds in one day), -2, -3 ... is appended.
-    - The initial milestone release is v1.0.0; day-to-day builds use the date tag.
+    - Day-to-day builds use the date tag.
 
   The script is ASCII-only; any non-ASCII passed via -Name/-Body is JSON-escaped
   to \uXXXX so it survives PowerShell 5.1 + git without mangling.
